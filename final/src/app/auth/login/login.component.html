@@ -1,0 +1,31 @@
+<div class="login-body">
+  <div class="login-form">
+  
+    <form [formGroup]="loginForm">
+      <div class="text-center">
+        <h1 style="color: WHITE;"><b>Login</b></h1>
+      </div>
+      <div class="form-group">
+        <label for="username">UserName</label>
+        <input type="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{
+            'is-invalid':controls['userName'].invalid &&(controls['userName'].touched ||controls['userName'].dirty)
+        }" />
+      </div>
+      <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['userName'].invalid &&(controls['userName'].touched ||controls['userName'].dirty)"><b>Username is required !</b>
+      </small>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" placeholder="Password" formControlName="password" [ngClass]="{
+            'is-invalid':controls['password'].invalid &&(controls['password'].touched ||controls['password'].dirty)
+        }" />
+      </div>
+      <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['password'].invalid &&(controls['password'].touched ||controls['password'].dirty)"><b>Password is required !</b></small>
+      <div class="text-center">
+        <button class="btn" (click)="login()"><b>Login</b></button>
+      </div>
+      <div class="text-center"  style="margin-top: 0.8rem;">
+        <span style="color: white;">Don't have an account ?<a routerLink="../signup">Create One</a></span>
+      </div>
+    </form>
+  </div>
+</div>

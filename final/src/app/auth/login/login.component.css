@@ -1,0 +1,72 @@
+.login-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap ;
+    background:url('../../../assets/data/cybersecurity-background-klwhxag8q6z3pakn.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login-form{
+    position: absolute;
+    top: 10rem;
+    padding: 1rem;
+    width: 40%;
+    border: 1px solid transparent;
+    height: max-content ;
+    border-radius: 1rem;
+    z-index: 100;
+    backdrop-filter: blur(7px);
+    animation: bor 1s ease 300ms infinite  alternate;
+
+}
+::placeholder{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+label{
+    color: white;
+    margin-bottom: 0.6rem;
+}
+.form-group{
+    margin: 0.6rem;
+}
+.btn{
+    width: 30%;
+    border:1px solid black;
+    color: white;
+    background-color: black;
+    
+}
+.btn:hover{
+ box-shadow: 0 0 10px ;
+}
+@keyframes bor {
+  0%{
+      border-top-color: white;
+    }
+    25%{
+        border-right-color: white;
+    }
+    50%{
+        border-bottom-color: white;
+    }
+    75%{
+        border-left-color: white;
+    }
+}
+
+span a{
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 3px;
+    padding: 3px;
+    transition: all 300ms ease;
+    color: white;
+}
+span  a:hover{
+    color:rgb(0, 0, 0)
+}
