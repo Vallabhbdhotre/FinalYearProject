@@ -1,6 +1,6 @@
 <div class="login-body">
   <div class="login-form">
-  
+
     <form [formGroup]="loginForm">
       <div class="text-center">
         <h1 style="color: WHITE;"><b>Login</b></h1>
@@ -21,10 +21,10 @@
       </div>
       <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['password'].invalid &&(controls['password'].touched ||controls['password'].dirty)"><b>Password is required !</b></small>
       <div class="text-center">
-        <button class="btn" (click)="login()"><b>Login</b></button>
+        <button class="btn" id="button" (click)="login()"><b>Login</b></button>
       </div>
       <div class="text-center"  style="margin-top: 0.8rem;">
-        <span style="color: white;">Don't have an account ?<a routerLink="../signup">Create One</a></span>
+        <span style="color: white;"><b>Don't have an account ?</b><a class="new" routerLink="../signup"><i>Create One</i></a></span>
       </div>
     </form>
   </div>

@@ -1,0 +1,57 @@
+<div class="body">
+  <div class="left-body">
+    <div class="button">
+      <button type="button" (click)="back()">
+        <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
+      </button>
+    </div>
+   
+      <img  class="formimg animate__animated animate__fadeInDown" src=".../../../../../../../assets/data/Aadhaar.jpg" alt="Aadhar_imgae"  height="350px" />
+  
+  </div>
+  <div class="right-body">
+    <div class="container">
+      <form class="animate__animated animate__fadeInRight">
+        <div class="text-center header">
+          <h2>Add Aadhar Details</h2>
+        </div>
+        <div class="form-group">
+          <label>Name</label><br />
+          <input type="text" class="form-control" placeholder="Your Name As Per Aadhar.." />
+        </div>
+        <div class="form-group">
+          <label>Aadhar Number</label><br />
+          <input
+            type="number"
+            class="form-control"
+            inputmode="numeric"
+            placeholder=" 12 digit number"
+          />
+        </div>
+        <div class="form-group">
+          <label>Date Of Birth</label><br />
+          <input
+            type="date"
+            class="form-control"
+            inputmode="numeric"
+            placeholder=" 12 digit number"
+          />
+        </div>
+        <div class="form-group">
+          <label>Select your Gender:</label><br>
+          <input class="form-check-input" type="radio" id="male" name="fav_language" value="Male">
+          <label style="margin-left: 5px;" class="form-check-label" for="male"> Male</label><br>
+          <input class="form-check-input" type="radio" id="female" name="fav_language" value="Female">
+          <label style="margin-left: 5px;" class="form-check-label" for="female"> Female</label><br>
+        </div>
+        <div class="form-group">
+          <label>Upload Aadhar</label><br />
+          <input type="file" class="form-control"/>
+        </div>
+        <div class="text-center">
+          <input (click)="submit()" type="button" class="btn " value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

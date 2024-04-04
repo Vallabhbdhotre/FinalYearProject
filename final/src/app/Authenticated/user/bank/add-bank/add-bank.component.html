@@ -1,0 +1,116 @@
+<div class="body">
+  <div class="left-body">
+    <div class="button">
+      <button type="button" (click)="back()">
+        <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
+      </button>
+    </div>
+    <img
+      style="margin-bottom: 1.5rem"
+      class="formimg animate__animated animate__fadeInDown"
+      src=".../../../../../../../assets/data/bank-removebg-preview.png"
+      alt="Aadhar_imgae"
+      height="400px"
+    />
+  </div>
+  <div class="right-body">
+    <div class="container">
+      <form [formGroup]="bankform" class="addbank animate__animated animate__fadeInRight" action="">
+        <div class=" text-center header">
+          <h2 >Add Bank Details</h2>
+        </div>
+        <div formGroupName="bankinfo">
+          <div class="form-group">
+            <label> Bank Name</label><br />
+            <input
+              formControlName="bankName"
+              type="text"
+              class="form-control"
+              placeholder="Bank name"
+            />
+          </div>
+          <div class="form-group">
+            <label>Account Number</label><br />
+            <input
+              type="number"
+              class="form-control"
+              inputmode="numeric"
+              placeholder=" Account number"
+              formControlName="accountNo"
+            />
+          </div>
+          <div class="form-group">
+            <label> Account Holder Name</label><br />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Account holder name"
+              formControlName="accountHoldersName"
+            />
+          </div>
+          <div class="form-group">
+            <label>IFSC Code</label><br />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="IFSC code"
+              formControlName="ifsc"
+            />
+          </div>
+        </div>
+        <div class="card-container">
+          <button
+            type="submit"
+            class="btn1 btn-success"
+            *ngIf="creditStatus"
+            (click)="addCredit()"
+          >
+            Add Credit Card
+          </button>
+          <button type="submit" class="btn1 btn-success" (click)="adddebit()">Add Debit Card</button>
+        </div>
+        <div formArrayName="creditcard">
+          <div *ngFor="let ph of cardArray.controls; let i = index">
+            <div [formGroupName]="i" class="form-group">
+              <label>Card Number</label><br />
+              <input
+                type="number"
+                formControlName="cardNo"
+                class="form-control"
+              />
+              <label>Pin</label><br />
+              <input
+                type="password"
+                formControlName="pin"
+                class="form-control"
+              />
+              <label>CVV Number</label><br />
+              <input type="number" formControlName="cvv" class="form-control" />
+              <label>Expiry Date</label><br />
+              <input
+                type="date"
+                formControlName="expiry"
+                class="form-control"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="removecard(i)"
+              class="btn btn-outline-danger center"
+            >
+              Remove card
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+            <label>Upload Aadhar</label><br />
+            <input type="file" class="form-control"/>
+          </div> -->
+        <div class="text-center">
+         <input type="button" value="Submit" class="btn" (click)="submit()">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
