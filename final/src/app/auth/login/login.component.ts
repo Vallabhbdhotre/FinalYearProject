@@ -20,7 +20,7 @@ export class LoginComponent {
   ) {
     localStorage.clear();
     this.loginForm = this.fb.group({
-      userName: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -41,7 +41,8 @@ export class LoginComponent {
   }
   login() {
     if (this.loginForm.valid) {
-      this.router.navigate(['user']);
+      // localStorage.setItem("userData",JSON.stringify(this.loginForm.value))
+      // this.router.navigate(['user']);
       let buttonContent = document.getElementById('button');
       if (buttonContent) {
         buttonContent.innerHTML = 'Logging in ...';
@@ -50,6 +51,7 @@ export class LoginComponent {
         next: (res: any) => {
           if (res) {
             localStorage.setItem('token', res.token);
+            localStorage.setItem('username',res.username)
             this.Toast.fire({
               icon: "success",
               title: "Signed in successfully"

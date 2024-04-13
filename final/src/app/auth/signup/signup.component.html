@@ -1,3 +1,6 @@
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
 <div class="login-body">
     <div class="login-form" style="position: relative; top:0 ;">
     
@@ -7,22 +10,22 @@
         </div>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name" [ngClass]="{
-                'is-invalid':controls['Name'].invalid &&(controls['Name'].touched ||controls['Name'].dirty)
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" [ngClass]="{
+                'is-invalid':controls['name'].invalid &&(controls['name'].touched ||controls['name'].dirty)
             }" />
           </div>
-          <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['Name'].invalid &&(controls['Name'].touched ||controls['Name'].dirty)"><b>Name is required !</b>
+          <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['name'].invalid &&(controls['name'].touched ||controls['name'].dirty)"><b>Name is required !</b>
           </small>
         <div class="form-group">
           <label for="username">UserName</label>
-          <input type="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{
-              'is-invalid':controls['userName'].invalid &&(controls['userName'].touched ||controls['userName'].dirty)
+          <input type="text" class="form-control" placeholder="Username" formControlName="username" [ngClass]="{
+              'is-invalid':controls['username'].invalid &&(controls['username'].touched ||controls['username'].dirty)
           }" />
         </div>
-        <div *ngIf="controls['userName'].invalid &&controls['userName'].touched ">
-            <small style="padding-left: 1rem;" class="text-danger" *ngIf="controls['userName'].hasError('minlength')">UserName Must Be Of 4 characters</small>
+        <div *ngIf="controls['username'].invalid &&controls['username'].touched ">
+            <small style="padding-left: 1rem;" class="text-danger" *ngIf="controls['username'].hasError('minlength')">UserName Must Be Of 4 characters</small>
         </div>
-        <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['userName'].invalid &&(controls['userName'].touched ||controls['userName'].dirty)"><b>Username is required !</b>
+        <small style="padding-left:1rem;" class="text-danger" *ngIf="controls['username'].invalid &&(controls['username'].touched ||controls['username'].dirty)"><b>Username is required !</b>
         </small>
         <div class="form-group">
             <label for="username">Email</label>

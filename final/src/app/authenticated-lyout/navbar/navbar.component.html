@@ -1,6 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a
+      style="font-size: 1.6rem"
+      class="navbar-brand"
+      routerLink="user/dashboard/About"
+      ><img
+        style="height: 3rem"
+        src="../../../assets/data/navimage-removebg-preview.png"
+        alt="Brand_image"
+      /><b><i style="height: 2rem">CryptaShield</i></b></a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -15,12 +24,45 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="user/dashboard"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" routerLink="user/dashboard/About">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" routerLink="user/dashboard/contact_us">Contact Us</a>
         </li>
-        <li class="nav-item dropdown">
+        
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="auth/login"
+              *ngIf="!loginService.isloggedin()"
+              ><span class="material-symbols-outlined p-1" style="position:relative; top: 5px;"> login </span>Login</a
+            >
+          </li>
+          <ul class="d-inline-flex" style="padding-left:40rem;">
+          <li class="nav-item"   (click)="logOut()" style="cursor: pointer; ">
+            <a class="nav-link" *ngIf="loginService.isloggedin()">
+              <span class="material-symbols-outlined" style="position:relative; top: 5px;"> logout </span>Logout
+            </a>
+          </li>
+          <li class="nav-item  my-2 my-lg-0" style="position: relative;  top: -3px;">
+            <a class="nav-link" *ngIf="loginService.isloggedin()"
+              ><span class="material-symbols-outlined p-1" style="position:relative; top: 5px; "> person </span
+              >{{ userName }}</a
+            >
+          </li>
+        </ul>
+        
+        
+      
+        <!-- <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -37,7 +79,7 @@
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

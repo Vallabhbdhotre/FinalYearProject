@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
+import { BankService } from 'src/app/services/bankService/bank.service';
 @Component({
   selector: 'app-add-bank',
   templateUrl: './add-bank.component.html',
@@ -11,15 +13,17 @@ export class AddBankComponent {
   creditStatus:boolean=true;
   debitStatus:boolean=true;
   bankform: FormGroup;
-  constructor(private location: Location, private fb: FormBuilder) {
+  constructor(private location: Location, private fb: FormBuilder, private bankService:BankService) {
     this.bankform = this.fb.group({
-      bankinfo: this.fb.group({
         bankName: ['', Validators.required],
-        accountNo: [null, Validators.required],
-        accountHoldersName: ['', Validators.required],
-        ifsc: ['', Validators.required],
-      }),
-      creditcard: this.fb.array([]),
+        accountNumber: [null, Validators.required],
+        accountHolderName: ['', Validators.required],
+        ifscCode: ['', Validators.required],
+        debitCardNumber:[null,Validators.required],
+        pin:[null,Validators.required],
+        cvv:[null,Validators.required],
+        expiryDate:['',Validators.required]
+      // creditcard: this.fb.array([]),
     });
   }
   back() {
@@ -58,26 +62,43 @@ export class AddBankComponent {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
+        position:'center',
         confirmButtonColor: "green",
         cancelButtonColor: "#d33",
         confirmButtonText: "Submit"
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "Submited!",
-            text: "Bank Details has been submitted.",
-            icon: "success"
-          });
-          console.log("Submitted !")
-          this.bankform.reset()
+          this.bankService.addBank(this.bankform.value).subscribe({
+            next:()=>{
+              Swal.fire({
+                title: "Submited!",
+                text: "Bank Details has been submitted.",
+                icon: "success"
+              });
+              console.log("Submitted !")
+              this.bankform.reset()
+            },
+            error:(error)=>{
+              Swal.fire({
+                title: "Failed !",
+                text: "Failed to submit bank details !",
+                icon: "error"
+              });
+              console.log(error);
+            }
+          })
         }
       });
       
     }
     else{
       this.bankform.markAllAsTouched();
-      alert('All fields are required !');
+      alert('Fill all mandatory fields !');
+   
     }
     
+  }
+  get controls(){
+    return this.bankform.controls;
   }
 }

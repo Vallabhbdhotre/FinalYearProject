@@ -10,5 +10,8 @@ export class BankComponent {
 
   back() {
     this.location.back();
-  }
+}
+ 
+
+
 }

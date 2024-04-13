@@ -14,12 +14,11 @@ export class SignupComponent {
   constructor(
     private fb: FormBuilder,
     private signupService: SignupService,
-    private snack: MatSnackBar,
     private router: Router
   ) {
     this.signupForm = this.fb.group({
-      Name: ['', Validators.required],
-      userName: ['', [Validators.required, Validators.minLength(4)]],
+      name: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       phone: [null, Validators.required],
@@ -42,6 +41,7 @@ export class SignupComponent {
 
   signup() {
     if (this.signupForm.valid) {
+      // localStorage.setItem('userData',JSON.stringify(this.signupForm.value))
       this.signupService.signup(this.signupForm.value).subscribe({
         next:(res)=>{
           this.Toast.fire({

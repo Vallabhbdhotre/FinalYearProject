@@ -1,45 +1,62 @@
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
 <div class="body">
-    <div class="left-body">
-      <div class="button">
-        <button type="button" (click)="back()">
-          <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
-        </button>
-      </div>
-     
-        <img  class="formimg animate__animated animate__fadeInDown" src=".../../../../../../../assets/data/pan-card.png" alt="Aadhar_imgae"  height="350px" />
-    
+  <div class="left-body">
+    <div class="button">
+      <button type="button" (click)="back()">
+        <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
+      </button>
     </div>
-    <div class="right-body">
-      <div class="container">
-        <form class="animate__animated animate__fadeInRight">
-          <div class=" text-center header">
-            <h2>Add PAN Details</h2>
-          </div>
-          <div class="form-group">
-            <label>Name</label><br />
-            <input type="text" class="form-control" placeholder="Your Name.." />
-          </div>
-          <div class="form-group">
-            <label>PAN Number</label><br />
-            <input
-              type="number"
-              class="form-control"
-              placeholder=" 10 digit number"
-            />
-          </div>
-          <div class="form-group">
-            <label>Address</label><br />
-            <input type="text" class="form-control" placeholder="Your Address" />
-          </div>
-          <div class="form-group">
-            <label>Upload PAN</label><br />
-            <input type="file" class="form-control" />
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn">Submit</button>
-          </div>
-        </form>
-      </div>
+
+    <img
+      class="formimg animate__animated animate__fadeInDown"
+      src=".../../../../../../../assets/data/pan-card.png"
+      alt="Aadhar_imgae"
+      height="350px"
+    />
+  </div>
+  <div class="right-body">
+    <div class="container">
+      <!-- {{ panform.value | json }} -->
+      <form
+        [formGroup]="panform"
+        class="animate__animated animate__fadeInRight"
+      >
+        <div class="text-center header">
+          <h2>Add PAN Details</h2>
+        </div>
+        <div class="form-group">
+          <label>Name *</label><br />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Your Name.."
+            formControlName="name"
+            [ngClass]="{'is-invalid':controls['name'].invalid && (controls['name'].touched || controls['name'].dirty)}"
+          />
+          <small  class="text-danger" *ngIf="controls['name'].invalid && (controls['name'].touched ||controls['name'].dirty)"><b>Name is required !</b></small>
+        </div>
+        <div class="form-group">
+          <label>PAN Number *</label><br />
+          <input
+            type="text"
+            class="form-control"
+            placeholder=" 10 digit number"
+            formControlName="panNumber"
+            [ngClass]="{'is-invalid':controls['panNumber'].invalid && (controls['panNumber'].touched || controls['panNumber'].dirty)}"
+          />
+          <small  class="text-danger" *ngIf="controls['panNumber'].invalid && (controls['panNumber'].touched ||controls['panNumber'].dirty)"><b>PAN number is required !</b></small>
+        </div>
+        <div class="form-group">
+          <label>Date Of Birth *</label><br />
+          <input type="date" class="form-control" formControlName="dateOfBirth" [ngClass]="{'is-invalid':controls['dateOfBirth'].invalid &&(controls['dateOfBirth'].touched || controls['dateOfBirth'].dirty)}" />
+          <small  class="text-danger" *ngIf="controls['dateOfBirth'].invalid && (controls['dateOfBirth'].touched ||controls['dateOfBirth'].dirty)"><b>Date Of Birth is required !</b></small>
+        </div>
+        <div class="text-center">
+          <button type="submit" (click)="submit()" class="btn">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>
