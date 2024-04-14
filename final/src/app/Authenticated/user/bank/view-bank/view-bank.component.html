@@ -11,7 +11,7 @@
     <div class="view_body">
       <div class="Tbody">
         <div class="text-center" ><h1 style="color: white;" class="animate__animated animate__zoomIn">Bank Details </h1></div>
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" *ngIf="!viewIndividual">
           <thead>
             <tr class="text-center">
               <th><b style="color: white; font-size: 1.2rem">Sr.No</b></th>
@@ -26,13 +26,40 @@
               <td style="color: white">{{ i + 1 }}</td>
               <td style="color: white">{{ item.accountHolderName }}</td>
               <td style="color: white; ">
-                <span style="margin: 0 8px;cursor: pointer" class="material-symbols-outlined "> visibility </span>
+                <span style="margin: 0 8px;cursor: pointer" class="material-symbols-outlined " (click)="view(item.id)"> visibility </span>
                 <span style="margin: 0 8px;cursor: pointer; color: rgba(211, 211, 12, 0.874);" class="material-symbols-outlined" (click)="update(item.id)"> edit </span>
                 <span  style="margin: 0 8px;cursor: pointer; color: red;"class="material-symbols-outlined" (click)="delete(item.id)"> delete </span>
               </td>
             </tr>
           </tbody>
         </table>
+        <div class="Dcard" *ngIf="viewIndividual">
+          <div class="Vcard">
+            <div class="py-3">
+              <h3>{{ individualData.accountHolderName }}'s Bank details</h3>
+            </div>
+            <div class="card-fields">
+              <h5>Name:  {{ individualData.accountHolderName }}</h5>
+              <h5>Bank Name:  {{ individualData.bankName }}</h5>
+              <h5>Account Number:  {{ individualData.accountNumber }}</h5>
+              <h5>IFSC Code:  {{ individualData.ifscCode }}</h5>
+              <h5>Debit Card Number:  {{ individualData.debitCardNumber }}</h5>
+              <h5>PIN:  {{ individualData.pin }}</h5>
+              <h5>CVV Number:  {{ individualData.cvv }}</h5>
+              <h5> Card's Expiry Date:  {{ individualData.expiryDate }}</h5>
+
+              <div class="text-center">
+                <button
+                  type="button"
+                  (click)="update(individualData.id)"
+                  class="btn"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

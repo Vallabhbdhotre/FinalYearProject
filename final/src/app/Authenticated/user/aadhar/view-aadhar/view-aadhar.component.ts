@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { AadharService } from 'src/app/services/aadharService/aadhar.service';
-import { Router, TitleStrategy } from '@angular/router';
+import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-view-aadhar',
@@ -9,10 +9,24 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-aadhar.component.css'],
 })
 export class ViewAadharComponent {
-  constructor(private location: Location, private service: AadharService, private router:Router) {
+  viewIndividual: boolean = false;
+  id: any;
+  constructor(
+    private location: Location,
+    private service: AadharService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.getData();
+    
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id != null || this.id != undefined) {
+      this.viewIndividual = true;
+    }
+    this.getAadharById(this.id);
   }
   aadharData: any[] = [];
+  individualData: any = {};
 
   getData() {
     this.service.getAadhar().subscribe({
@@ -27,43 +41,50 @@ export class ViewAadharComponent {
       },
     });
   }
+  getAadharById(id: any) {
+    this.service.getByid(id).subscribe({
+      next: (result) => {
+        this.individualData = result;
+        console.log('data received!');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   back() {
     this.location.back();
   }
   view(id: any) {
-    this.router.navigate([''])
+    this.router.navigate(['user/dashboard/aadhar/view_aadhar', id]);
   }
   update(id: any) {
     // this.router.navigate(['aadhar/update_aadhar',id])
-    this.router.navigate(['aadhar/update_aadhar',id])
+    this.router.navigate(['user/dashboard/aadhar/update_aadhar', id]);
   }
   delete(id: any) {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "green",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Delete"
-    }).then((result)=>{
-      if(result.isConfirmed){
+      confirmButtonColor: 'green',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.service.deleteAadhar(id).subscribe({
-          next:()=>{
-            
-          },
-          error:(error)=>{
+          next: () => {},
+          error: (error) => {
             Swal.fire({
-              icon:"success",
-              title:"Success",
-              text:"Aadhar Details Deleted !"
-            })
-          }
-        })
+              icon: 'success',
+              title: 'Success',
+              text: 'Aadhar Details Deleted !',
+            });
+          },
+        });
       }
-    })
-      
-    
+    });
   }
 }

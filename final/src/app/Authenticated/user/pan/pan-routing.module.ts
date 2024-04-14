@@ -15,6 +15,9 @@ const routes: Routes = [
     path:'view_pan',component:ViewPanComponent,pathMatch:'full'
   },
   {
+    path:'view_pan/:id',component:ViewPanComponent,pathMatch:'full'
+  },
+  {
     path:'update_pan/:id',component:AddPanComponent,pathMatch:'full'
   }
 

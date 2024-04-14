@@ -53,8 +53,11 @@
           <input type="date" class="form-control" formControlName="dateOfBirth" [ngClass]="{'is-invalid':controls['dateOfBirth'].invalid &&(controls['dateOfBirth'].touched || controls['dateOfBirth'].dirty)}" />
           <small  class="text-danger" *ngIf="controls['dateOfBirth'].invalid && (controls['dateOfBirth'].touched ||controls['dateOfBirth'].dirty)"><b>Date Of Birth is required !</b></small>
         </div>
-        <div class="text-center">
+        <div class="text-center" *ngIf="!isEdit">
           <button type="submit" (click)="submit()" class="btn">Submit</button>
+        </div>
+        <div class="text-center" *ngIf="isEdit">
+          <button type="submit" (click)="updatepan()" class="btn">Update</button>
         </div>
       </form>
     </div>

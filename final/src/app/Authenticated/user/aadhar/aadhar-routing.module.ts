@@ -19,11 +19,11 @@ const routes: Routes = [
     component: ViewAadharComponent,
     pathMatch: 'full',
   },
-  // {
-  //   path: 'view_aadhar/:id',
-  //   component: ViewAadharComponent,
-  //   pathMatch: 'full',
-  // },
+  {
+    path: 'view_aadhar/:id',
+    component: ViewAadharComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'update_aadhar/:id',
     component: AddAadharComponent,

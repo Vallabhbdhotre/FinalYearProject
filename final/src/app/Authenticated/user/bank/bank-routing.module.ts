@@ -20,6 +20,16 @@ const routes: Routes = [
     component: ViewBankComponent,
     pathMatch: 'full',
   },
+  {
+    path: 'view_bank/:id',
+    component: ViewBankComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'update_bank/:id',
+    component: AddBankComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

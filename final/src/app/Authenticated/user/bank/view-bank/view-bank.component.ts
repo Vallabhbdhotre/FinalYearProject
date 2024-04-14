@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BankService } from 'src/app/services/bankService/bank.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-view-bank',
@@ -9,12 +9,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-bank.component.css'],
 })
 export class ViewBankComponent {
+ id:any
+ viewIndividual:boolean=false
+ individualData:any={}
+
   constructor(
     private service: BankService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private route:ActivatedRoute
   ) {
     this.getData();
+    this.id=route.snapshot.paramMap.get('id');
+    if(this.id!=null || this.id != undefined){
+      this.viewIndividual=true;
+    }
+    this.getById(this.id);
   }
   bankData: any[] = [];
 
@@ -32,15 +42,32 @@ export class ViewBankComponent {
     });
   }
 
+  getById(id:any){
+    this.service.getByid(id).subscribe({
+      next:(result)=>{
+      this.individualData=result;
+      console.log('Data with id received !');
+      },
+      error:(error)=>{
+       console.log(error);
+      }
+    })
+
+  }
+
+
+
+
+
+
   back() {
     this.location.back();
   }
   view(id: any) {
-    this.router.navigate(['']);
+    this.router.navigate(['user/dashboard/bank/view_bank',id]);
   }
   update(id: any) {
-    // this.router.navigate(['aadhar/update_aadhar',id])
-    this.router.navigate([]);
+    this.router.navigate(['user/dashboard/bank/update_bank',id]);
   }
   delete(id: any) {
     Swal.fire({

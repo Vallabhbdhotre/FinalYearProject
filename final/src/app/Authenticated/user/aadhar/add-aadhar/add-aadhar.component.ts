@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,10 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './add-aadhar.component.html',
   styleUrls: ['./add-aadhar.component.css'],
 })
-export class AddAadharComponent {
+export class AddAadharComponent implements OnInit {
   aadharBodyStatus: boolean = false;
   aadharform: FormGroup;
-  id:any=null;
+  id:any;
   isEdit:boolean=false;
 
   constructor(
@@ -29,11 +29,15 @@ export class AddAadharComponent {
       cardNumber: [null, Validators.required],
       gender: ['', Validators.required],
     });
-    this.id=this.route.snapshot.paramMap.get('id');
-    if(this.id){
+    
+  }
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    if(this.id !=null || this.id !=undefined){
       this.isEdit=true;
     }
-    this.getById()
+    this.getById(this.id);
+    console.log('id:',this.id)
   }
 
   back() {
@@ -42,8 +46,8 @@ export class AddAadharComponent {
   get controls() {
     return this.aadharform.controls;
   }
-  getById(){
-  this.aadharService.getByid(this.id).subscribe({
+  getById(id:any){
+  this.aadharService.getByid(id).subscribe({
     next:(res)=>{
      if(res){
       this.aadharform.patchValue({
@@ -63,24 +67,24 @@ export class AddAadharComponent {
     if(this.aadharform.valid){
       Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: 'green',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Submit',
+        confirmButtonText: 'Update',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.aadharService.updateAadhar(this.aadharform.value,this.id).subscribe({
+          this.aadharService.updateAadhar(this.id,this.aadharform.value).subscribe({
             next: (res) => {
               Swal.fire({
-                title: 'Submited !',
+                title: 'Updated !',
                 text: 'Aadhar Details has been updated .',
                 icon: 'success',
               });
               console.log('Submitted !');
               this.aadharform.reset();
-              this.router.navigate(['aadhar/view_aadhar']);
+              this.router.navigate(['user/dashboard/aadhar/view_aadhar',this.id]);
+              // this.router.navigate(['user/dashboard/aadhar/view_aadhar'])
             },
             error: (error) => {
               console.log(error);
@@ -100,20 +104,6 @@ export class AddAadharComponent {
   }
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   submit() {

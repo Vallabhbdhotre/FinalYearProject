@@ -11,8 +11,12 @@
   <!-- <h2 class="text-center">Aadhar Details</h2> -->
   <div class="view_body">
     <div class="Tbody">
-      <div class="text-center" ><h1 style="color: white;" class="animate__animated animate__zoomIn">Aadhar Details </h1></div>
-      <table class="table table-bordered table-hover">
+      <div class="text-center">
+        <h1 style="color: white" class="animate__animated animate__zoomIn">
+          Aadhar Details
+        </h1>
+      </div>
+      <table *ngIf="!viewIndividual" class="table table-bordered table-hover">
         <thead>
           <tr class="text-center">
             <th><b style="color: white; font-size: 1.2rem">Sr.No</b></th>
@@ -23,17 +27,64 @@
           </tr>
         </thead>
         <tbody>
-          <tr  class="text-center animate__animated animate__fadeIn" *ngFor="let item of aadharData; let i = index">
+          <tr
+            class="text-center animate__animated animate__fadeIn"
+            *ngFor="let item of aadharData; let i = index"
+          >
             <td style="color: white">{{ i + 1 }}</td>
             <td style="color: white">{{ item.holderName }}</td>
-            <td style="color: white; ">
-              <span style="margin: 0 8px;cursor: pointer" class="material-symbols-outlined "> visibility </span>
-              <span style="margin: 0 8px;cursor: pointer;color: rgba(203, 203, 21, 0.774);" class="material-symbols-outlined" (click)="update(item.id)"> edit </span>
-              <span  style="margin: 0 8px;cursor: pointer;color: red;"class="material-symbols-outlined" (click)="delete(item.id)"> delete </span>
+            <td style="color: white">
+              <span
+                style="margin: 0 8px; cursor: pointer"
+                class="material-symbols-outlined"
+                (click)="view(item.id)"
+              >
+                visibility
+              </span>
+              <span
+                style="
+                  margin: 0 8px;
+                  cursor: pointer;
+                  color: rgba(203, 203, 21, 0.774);
+                "
+                class="material-symbols-outlined"
+                (click)="update(item.id)"
+              >
+                edit
+              </span>
+              <span
+                style="margin: 0 8px; cursor: pointer; color: red"
+                class="material-symbols-outlined"
+                (click)="delete(item.id)"
+              >
+                delete
+              </span>
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="Dcard" *ngIf="viewIndividual">
+        <div class="Vcard">
+          <div class="py-3">
+            <h3>{{ individualData.holderName }}'s Aadhar details</h3>
+          </div>
+          <div class="card-fields">
+            <h5>Name:  {{ individualData.holderName }}</h5>
+            <h5>Aadhar Number:  {{ individualData.cardNumber }}</h5>
+            <h5>Date Of Birth:  {{ individualData.dateOfBirth }}</h5>
+            <h5>Gender:  {{ individualData.gender }}</h5>
+            <div class="text-center">
+              <button
+                type="button"
+                (click)="update(individualData.id)"
+                class="btn"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

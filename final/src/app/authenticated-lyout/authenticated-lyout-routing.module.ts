@@ -6,7 +6,7 @@ const routes: Routes = [
     path:'admin', loadChildren:()=>import('./../Authenticated/adminr/adminr.module').then((m)=>m.AdminrModule)
   },
   {
-    path:'user',loadChildren:()=>import('./../Authenticated/user/user.module').then((m)=>m.UserModule)
+    path:'user',loadChildren:()=>import('./../Authenticated/user/user.module').then((m)=>m.UserModule),
   }
  
 ];

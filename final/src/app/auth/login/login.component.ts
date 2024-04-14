@@ -45,7 +45,7 @@ export class LoginComponent {
       // this.router.navigate(['user']);
       let buttonContent = document.getElementById('button');
       if (buttonContent) {
-        buttonContent.innerHTML = 'Logging in ...';
+        buttonContent.innerHTML = '<b>Logging in ...</b>';
       }
       this.loginservice.login(this.loginForm.value).subscribe({
         next: (res: any) => {
@@ -61,10 +61,10 @@ export class LoginComponent {
         },
         error: (error) => {
           if (buttonContent) {
-            buttonContent.innerHTML = 'Login';
+            buttonContent.innerHTML = '<b>Login</b>';
           }
           console.log(error);
-          if (error.status == 412) {
+          if (error.status == 412 || error.status ==500) {
             this.Toast.fire({
               icon: "error",
               title: "Invalid Username or Password !"

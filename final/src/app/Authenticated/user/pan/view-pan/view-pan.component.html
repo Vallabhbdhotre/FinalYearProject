@@ -2,37 +2,88 @@
 <div id="stars2"></div>
 <div id="stars3"></div>
 <div class="body">
-    <div class="button">
-      <button type="button" (click)="back()">
-        <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
-      </button>
-    </div>
-    <div class="view_body">
-      <div class="Tbody">
-        <div class="text-center" ><h1 style="color: white;" class="animate__animated animate__zoomIn">PAN Details </h1></div>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="text-center">
-              <th><b style="color: white; font-size: 1.2rem">Sr.No</b></th>
-              <th>
-                <b style="color: white; font-size: 1.2rem">Name of Recipient</b>
-              </th>
-              <th><b style="color: white; font-size: 1.2rem">Action</b></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr  class="text-center animate__animated animate__fadeIn" *ngFor="let item of panData; let i = index">
-              <td style="color: white">{{ i + 1 }}</td>
-              <td style="color: white">{{ item.name }}</td>
-              <td style="color: white; ">
-                <span style="margin: 0 8px;cursor: pointer" class="material-symbols-outlined "> visibility </span>
-                <span style="margin: 0 8px;cursor: pointer;color: rgba(208, 208, 24, 0.949);" class="material-symbols-outlined" (click)="update(item.id)"> edit </span>
-                <span  style="margin: 0 8px;cursor: pointer;color: red;"class="material-symbols-outlined" (click)="delete(item.id)"> delete </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="button">
+    <button type="button" (click)="back()">
+      <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
+    </button>
+  </div>
+  <div class="view_body">
+    <div class="Tbody">
+      <div class="text-center">
+        <h1 style="color: white" class="animate__animated animate__zoomIn">
+          PAN Details
+        </h1>
+      </div>
+      <table class="table table-bordered table-hover" *ngIf="!viewIndividual">
+        <thead>
+          <tr class="text-center">
+            <th><b style="color: white; font-size: 1.2rem">Sr.No</b></th>
+            <th>
+              <b style="color: white; font-size: 1.2rem">Name of Recipient</b>
+            </th>
+            <th><b style="color: white; font-size: 1.2rem">Action</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="text-center animate__animated animate__fadeIn"
+            *ngFor="let item of panData; let i = index"
+          >
+            <td style="color: white">{{ i + 1 }}</td>
+            <td style="color: white">{{ item.name }}</td>
+            <td style="color: white">
+              <span
+                style="margin: 0 8px; cursor: pointer"
+                class="material-symbols-outlined"
+                (click)="view(item.id)"
+              >
+                visibility
+              </span>
+              <a (click)="update(item.id)"
+                ><span
+                  style="
+                    margin: 0 8px;
+                    cursor: pointer;
+                    color: rgba(208, 208, 24, 0.949);
+                  "
+                  class="material-symbols-outlined"
+                  (click)="update(item.id)"
+                >
+                  edit
+                </span></a
+              >
+              <span
+                style="margin: 0 8px; cursor: pointer; color: red"
+                class="material-symbols-outlined"
+                (click)="delete(item.id)"
+              >
+                delete
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="Dcard" *ngIf="viewIndividual">
+        <div class="Vcard">
+          <div class="py-3">
+            <h3>{{ individualData.name }}'s Pan details</h3>
+          </div>
+          <div class="card-fields">
+            <h5>Name: {{ individualData.name }}</h5>
+            <h5>PAN Number: {{ individualData.panNumber }}</h5>
+            <h5>Date Of Birth: {{ individualData.dateOfBirth }}</h5>
+            <div class="text-center">
+              <button
+                type="button"
+                (click)="update(individualData.id)"
+                class="btn"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
