@@ -1,6 +1,8 @@
-<div id="stars"></div>
-<div id="stars2"></div>
-<div id="stars3"></div>
+<div class="anime">
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+  </div>
 <div class="body">
   <div class="left-body">
     <div class="button">
@@ -8,38 +10,88 @@
         <img src="../../../../../assets/data/Arrow_Left-1024.webp" alt="" />
       </button>
     </div>
-   
-      <img  class="formimg animate__animated animate__fadeInDown" src=".../../../../../../../assets/data/Aadhaar.jpg" alt="Aadhar_imgae"  height="350px" />
-  
+
+    <img
+      class="formimg animate__animated animate__fadeInDown"
+      src=".../../../../../../../assets/data/Aadhaar.jpg"
+      alt="Aadhar_imgae"
+      height="350px"
+    />
   </div>
   <div class="right-body">
     <div class="container">
       <!-- {{this.aadharform.value | json}} -->
-      <form [formGroup]="aadharform"  class="animate__animated animate__fadeInRight">
+      <form
+        [formGroup]="aadharform"
+        class="animate__animated animate__fadeInRight"
+      >
         <div class="text-center header">
-          <h2> {{isEdit ? "Update": "Add "}} Aadhar Details</h2>
+          <h2>{{ isEdit ? "Update" : "Add " }} Aadhar Details</h2>
         </div>
         <div class="form-group">
           <label>Name *</label><br />
-          <input type="text" class="form-control" placeholder="Your Name As Per Aadhar.." formControlName="holderName"  [ngClass]="{
-            'is-invalid':controls['holderName'].invalid && (controls['holderName'].touched ||controls['holderName'].dirty)
-          }" />
-          <small  class="text-danger" *ngIf="controls['holderName'].invalid && (controls['holderName'].touched ||controls['holderName'].dirty)"><b>Name is required !</b></small>
-
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Your Name As Per Aadhar.."
+            formControlName="holderName"
+            [ngClass]="{
+              'is-invalid':
+                controls['holderName'].invalid &&
+                (controls['holderName'].touched || controls['holderName'].dirty)
+            }"
+          />
+          <small
+            class="text-danger"
+            *ngIf="(controls['holderName'].touched ||
+            controls['holderName'].dirty) &&
+              controls['holderName'].hasError('required')
+            "
+            ><b>Name is required !</b></small
+          >
+          <small *ngIf="controls['holderName'].hasError('pattern')" class="text-danger"><b>Enter Valid Name !</b></small>
         </div>
         <div class="form-group">
           <label>Aadhar Number *</label><br />
           <input
-            type="number"
+            type="text"
             class="form-control"
             inputmode="numeric"
             placeholder="12 digit number"
             formControlName="cardNumber"
             [ngClass]="{
-              'is-invalid':controls['cardNumber'].invalid && (controls['cardNumber'].touched ||controls['cardNumber'].dirty)
+              'is-invalid':
+                controls['cardNumber'].invalid &&
+                (controls['cardNumber'].touched || controls['cardNumber'].dirty)
             }"
           />
-          <small  class="text-danger" *ngIf="controls['cardNumber'].invalid &&(controls['cardNumber'].touched ||controls['cardNumber'].dirty)"><b>Aadhar number is required !</b></small>
+          <small
+            class="text-danger"
+            *ngIf="
+              (controls['cardNumber'].touched ||
+                controls['cardNumber'].dirty) &&
+              controls['cardNumber'].hasError('required')
+            "
+            ><b>Aadhar number is required !</b></small
+          >
+          <small
+            class="text-danger"
+            *ngIf="controls['cardNumber'].hasError('minlength')"
+          >
+            <b>Invalid Aadhaar Number !</b>
+          </small>
+           <small
+            class="text-danger"
+            *ngIf="controls['cardNumber'].hasError('maxlength')"
+          >
+            <b>Invalid Aadhaar Number !</b>
+          </small>
+          <small
+          class="text-danger"
+          *ngIf="controls['cardNumber'].hasError('pattern')"
+        >
+          <b>Only numbers are allowed !</b>
+        </small>
         </div>
         <div class="form-group">
           <label>Date Of Birth *</label><br />
@@ -49,28 +101,69 @@
             inputmode="numeric"
             formControlName="dateOfBirth"
             placeholder=" 12 digit number"
-            [ngClass]="{'is-invalid':controls['dateOfBirth'].invalid && (controls['dateOfBirth'].touched || controls['dateOfBirth'].dirty)
+            [ngClass]="{
+              'is-invalid':
+                controls['dateOfBirth'].invalid &&
+                (controls['dateOfBirth'].touched ||
+                  controls['dateOfBirth'].dirty)
             }"
           />
-          <small  class="text-danger" *ngIf="controls['dateOfBirth'].invalid && (controls['dateOfBirth'].touched ||controls['dateOfBirth'].dirty)"><b>Date of Birth is required !</b></small>
+          <small
+            class="text-danger"
+            *ngIf="
+              controls['dateOfBirth'].invalid &&
+              (controls['dateOfBirth'].touched || controls['dateOfBirth'].dirty)
+            "
+            ><b>Date of Birth is required !</b></small
+          >
         </div>
         <div class="form-group">
-          <label>Select your Gender *</label><br>
-          <input class="form-check-input" type="radio" id="male" name="gender" value="Male" formControlName="gender">
-          <label style="margin-left: 5px;" class="form-check-label" for="male"> Male</label><br>
-          <input class="form-check-input" type="radio" id="female" name="gender" value="Female" formControlName="gender">
-          <label style="margin-left: 5px;" class="form-check-label" for="female"> Female</label><br>
-          <small  class="text-danger" *ngIf="controls['gender'].invalid && (controls['gender'].touched ||controls['gender'].dirty)"><b>Gender is required !</b></small>
+          <label>Select your Gender *</label><br />
+          <input
+            class="form-check-input"
+            type="radio"
+            id="male"
+            name="gender"
+            value="Male"
+            formControlName="gender"
+          />
+          <label style="margin-left: 5px" class="form-check-label" for="male">
+            Male</label
+          ><br />
+          <input
+            class="form-check-input"
+            type="radio"
+            id="female"
+            name="gender"
+            value="Female"
+            formControlName="gender"
+          />
+          <label style="margin-left: 5px" class="form-check-label" for="female">
+            Female</label
+          ><br />
+          <small
+            class="text-danger"
+            *ngIf="
+              controls['gender'].invalid &&
+              (controls['gender'].touched || controls['gender'].dirty)
+            "
+            ><b>Gender is required !</b></small
+          >
         </div>
         <!-- <div class="form-group">
           <label>Upload Aadhar</label><br />
           <input type="file" class="form-control"/>
         </div> -->
         <div class="text-center" *ngIf="!isEdit">
-          <input (click)="submit()" type="button" class="btn " value="Submit">
+          <input (click)="submit()" type="button" class="btn" value="Submit" />
         </div>
         <div class="text-center" *ngIf="isEdit">
-          <input (click)="updateAadhar()" type="button" class="btn " value="Submit">
+          <input
+            (click)="updateAadhar()"
+            type="button"
+            class="btn"
+            value="Submit"
+          />
         </div>
       </form>
     </div>

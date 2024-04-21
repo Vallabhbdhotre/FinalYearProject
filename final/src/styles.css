@@ -2,6 +2,7 @@
 
 html,
 body {
+  width: 100%;
   height: 100%;
 }
 body {
@@ -12,19 +13,25 @@ body {
   display: flex;
   justify-content: center;
 }
+.active{
+  color: white;
+}
 .content :nth-child(2){
   padding-left: 10px;
   padding-top: 5px;
 }
 .footer {
   width: 100%;
-  /* border: 1px solid rgb(216, 28, 28); */
-  height: calc(100% - 43rem);
+  height: calc(100% - 92%);
   background: black;
+}
+.anime{
+  width: 100%;
+  height:0;
 }
 .login-body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -33,12 +40,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
-
 .login-form {
-  position: absolute;
-  top: 10rem;
+  position: relative;
+  top: 9rem;
   padding: 1rem;
   width: 40%;
   border: 1px solid transparent;
@@ -99,9 +105,33 @@ span a:hover {
   /* border-bottom: 1px solid white;. */
 }
 
-@media screen and (max-width: 530px) {
-  .login-form {
+/* @media screen and (max-width: 530px) {
+  .login-body .login-form {
     width: 80%;
+  }
+} */
+@media screen and (max-width: 850px) {
+  .body .left-body {
+    display: none;
+  
+  }
+  .body .right-body {
+    width: 100%;
+  }
+  .body .right-body .container{
+    position: relative;
+    top: 8rem;
+  }
+  .body .right-body .container .content{
+   flex-direction: column;
+  }
+  .login-form{
+    width: 80%;
+  }
+}
+@media screen and (max-width:450px) {
+   .button{
+    display: none;
   }
 }
 .Rbody {
@@ -141,12 +171,9 @@ span a:hover {
 .body {
   height: 100%;
   width: 100%;
-  /* border: 3px solid red   ; */
   display: flex;
   justify-content: space-between;
-  /* flex-wrap: wrap; */
   background: black;
-  /* background: linear-gradient(200deg, rgb(97, 8, 223), rgb(60, 6, 121)); */
 }
 .header {
   text-transform: uppercase;
@@ -183,11 +210,7 @@ span a:hover {
   align-items: center;
 }
 form {
-  /* border: 1px solid; */
-
   padding: 10px;
-
-  /* scrollbar-width:none ; */
 }
 .addbank {
   height: 30rem;
@@ -222,14 +245,7 @@ form label {
     rgb(143, 143, 148)
   );
 }
-@media screen and (max-width: 850px) {
-  .left-body {
-    display: none;
-  }
-  .right-body {
-    width: 100%;
-  }
-}
+
 .RBody {
   background: black;
   /* background: linear-gradient(200deg, rgb(97, 8, 223), rgb(60, 6, 121)); */
@@ -307,6 +323,9 @@ form label {
   width: 100%;
   /* height: 100%; */
   justify-content: center;
+}
+.container1 .text-content{
+  padding: 10px;
 }
 
 #stars {

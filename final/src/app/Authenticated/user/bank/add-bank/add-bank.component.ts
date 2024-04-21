@@ -24,14 +24,45 @@ export class AddBankComponent {
     private route: ActivatedRoute
   ) {
     this.bankform = this.fb.group({
-      bankName: ['', Validators.required],
-      accountNumber: [null, Validators.required],
-      accountHolderName: ['', Validators.required],
-      ifscCode: ['', Validators.required],
-      debitCardNumber: [null, Validators.required],
-      pin: [null, Validators.required],
-      cvv: [null, Validators.required],
-      expiryDate: ['', Validators.required],
+      bankName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z]+(?:\\s[a-zA-Z]+)*$'),
+        ],
+      ],
+      accountNumber: [null, [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(9),Validators.maxLength(18)]],
+      accountHolderName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z]+(?:\\s[a-zA-Z]+)*$'),
+        ],
+      ],
+      ifscCode: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          Validators.pattern('^[A-Z]{4}0[A-Z0-9]{6}$'),
+        ],
+      ],
+      debitCardNumber: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(15),
+          Validators.maxLength(16),
+          Validators.pattern("^[0-9]*$")
+        ],
+      ],
+      pin: [null, [Validators.required,Validators.pattern('^[0-9]*$')]],
+      cvv: [
+        null,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(3),Validators.pattern("^[0-9]*$")],
+      ],
+      expiryDate: ['', [Validators.required,]],
       // creditcard: this.fb.array([]),
     });
 
@@ -79,14 +110,14 @@ export class AddBankComponent {
         position: 'center',
         confirmButtonColor: 'green',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Submit',
+        confirmButtonText: 'Encrypt',
       }).then((result) => {
         if (result.isConfirmed) {
           this.bankService.addBank(this.bankform.value).subscribe({
             next: () => {
               Swal.fire({
-                title: 'Submited!',
-                text: 'Bank Details has been submitted.',
+                title: 'Encrypted!',
+                text: 'Bank Details has been Encrypted Successfully.',
                 icon: 'success',
               });
               console.log('Submitted !');
@@ -95,7 +126,7 @@ export class AddBankComponent {
             error: (error) => {
               Swal.fire({
                 title: 'Failed !',
-                text: 'Failed to submit bank details !',
+                text: 'Failed to Encrypt bank details !',
                 icon: 'error',
               });
               console.log(error);
@@ -153,7 +184,7 @@ export class AddBankComponent {
               });
               console.log('Submitted !');
               this.bankform.reset();
-              // this.router.navigate(['user/dashboard/bank/view_bank', this.id]);
+              this.router.navigate(['user/dashboard/bank/view_bank', this.id]);
             },
             error: (error) => {
               console.log(error);

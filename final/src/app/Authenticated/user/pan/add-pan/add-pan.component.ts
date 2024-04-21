@@ -24,9 +24,23 @@ export class AddPanComponent {
     private route: ActivatedRoute
   ) {
     this.panform = this.fb.group({
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z]+(?:\\s[a-zA-Z]+)*$'),
+        ],
+      ],
       dateOfBirth: ['', Validators.required],
-      panNumber: [null, Validators.required],
+      panNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('^[A-Z]{5}[0-9]{4}[A-Z]{1}$'),
+        ],
+      ],
     });
     this.id = this.route.snapshot.paramMap.get('id');
     {
@@ -50,17 +64,17 @@ export class AddPanComponent {
         position: 'center',
         confirmButtonColor: 'green',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Submit',
+        confirmButtonText: 'Encrypt',
       }).then((result) => {
         if (result.isConfirmed) {
           this.panService.addPan(this.panform.value).subscribe({
             next: (res) => {
               Swal.fire({
-                title: 'Submited!',
-                text: 'Pan Details has been submitted.',
+                title: 'Encrypted!',
+                text: 'Pan Details has been Encrypted Successfully.',
                 icon: 'success',
               });
-              console.log('Submitted !',res);
+              console.log('Submitted !', res);
               this.panform.reset();
               this.router.navigate(['pan/view_pan']);
             },
@@ -75,7 +89,7 @@ export class AddPanComponent {
               } else {
                 Swal.fire({
                   title: 'Failed !',
-                  text: 'Failed to submit Pan details !',
+                  text: 'Failed to Encrypt Pan details !',
                   icon: 'error',
                 });
               }
