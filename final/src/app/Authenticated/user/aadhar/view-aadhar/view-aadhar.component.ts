@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class ViewAadharComponent {
   viewIndividual: boolean = false;
+  viewPlain:boolean=false;
+  viewEncrypted:boolean=true;
   id: any;
   constructor(
     private location: Location,
@@ -24,9 +26,11 @@ export class ViewAadharComponent {
       this.viewIndividual = true;
     }
     this.getAadharById(this.id);
+    this.getEncrypted(this.id);
   }
   aadharData: any[] = [];
   individualData: any = {};
+  EncryptedData:any={};
 
   getData() {
     this.service.getAadhar().subscribe({
@@ -86,5 +90,25 @@ export class ViewAadharComponent {
         });
       }
     });
+  }
+  getEncrypted(id: any) {
+    this.service.getEncryptedById(id).subscribe({
+      next: (res) => {
+        if (res) {
+          this.EncryptedData = res;
+          console.log(this.EncryptedData);
+          
+        }
+      },
+      error: (error) => {
+        console.log(error);
+
+        console.log(error.message);
+      },
+    });
+  }
+  changeStatus(){
+    this.viewEncrypted = !this.viewEncrypted;
+    this.viewPlain = !this.viewPlain;
   }
 }

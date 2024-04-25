@@ -76,7 +76,7 @@ export class AddPanComponent {
               });
               console.log('Submitted !', res);
               this.panform.reset();
-              this.router.navigate(['pan/view_pan']);
+              this.router.navigate(['user/dashboard/pan/view_pan']);
             },
             error: (error) => {
               if (error.status == 412) {

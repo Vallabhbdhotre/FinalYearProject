@@ -143,8 +143,10 @@ export class AddAadharComponent implements OnInit {
               });
               console.log('Submitted !');
               this.aadharform.reset();
-              this.router.navigate(['aadhar/view_aadhar']);
-            },
+              this.router.navigate([
+                'user/dashboard/aadhar/view_aadhar',
+                
+              ]);            },
             error: (error) => {
               if (error.status == 401) {
                 Swal.fire({

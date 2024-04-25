@@ -21,6 +21,9 @@ export class BankService {
    getByid(id:any):Observable<any>{
      return this.http.get<any>(`${this.baseUrl}/${id}`)
    }
+   getEncryptedById(id:any):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/entity/${id}`)
+   }
  
    //update Bank 
    updateBank(id:any ,data:any):Observable<any>{

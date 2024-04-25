@@ -9,22 +9,27 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-bank.component.css'],
 })
 export class ViewBankComponent {
- id:any
- viewIndividual:boolean=false
- individualData:any={}
+  id: any;
+  viewIndividual: boolean = false;
+  individualData: any = {};
+  EncryptedData: any = {};
+  viewEncrypted:boolean=true;
+  viewPlain:boolean= false;
+
 
   constructor(
     private service: BankService,
     private location: Location,
     private router: Router,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.getData();
-    this.id=route.snapshot.paramMap.get('id');
-    if(this.id!=null || this.id != undefined){
-      this.viewIndividual=true;
+    this.id = route.snapshot.paramMap.get('id');
+    if (this.id != null || this.id != undefined) {
+      this.viewIndividual = true;
     }
     this.getById(this.id);
+    this.getEncrypted(this.id);
   }
   bankData: any[] = [];
 
@@ -42,32 +47,26 @@ export class ViewBankComponent {
     });
   }
 
-  getById(id:any){
+  getById(id: any) {
     this.service.getByid(id).subscribe({
-      next:(result)=>{
-      this.individualData=result;
-      console.log('Data with id received !');
+      next: (result) => {
+        this.individualData = result;
+        console.log('Data with id received !');
       },
-      error:(error)=>{
-       console.log(error);
-      }
-    })
-
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
-
-
-
-
-
 
   back() {
     this.location.back();
   }
   view(id: any) {
-    this.router.navigate(['user/dashboard/bank/view_bank',id]);
+    this.router.navigate(['user/dashboard/bank/view_bank', id]);
   }
   update(id: any) {
-    this.router.navigate(['user/dashboard/bank/update_bank',id]);
+    this.router.navigate(['user/dashboard/bank/update_bank', id]);
   }
   delete(id: any) {
     Swal.fire({
@@ -99,5 +98,25 @@ export class ViewBankComponent {
         });
       }
     });
+  }
+  decrypt() {
+    this.getById(this.id);
+  }
+
+  getEncrypted(id: any) {
+    this.service.getEncryptedById(id).subscribe({
+      next: (res) => {
+        if (res) {
+          this.EncryptedData = res;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  changeStatus(){
+    this.viewEncrypted = !this.viewEncrypted;
+    this.viewPlain = !this.viewPlain;
   }
 }

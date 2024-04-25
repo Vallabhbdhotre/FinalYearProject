@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 export class ViewPanComponent {
   viewIndividual: boolean = false;
   individualData: any = {};
+  EncryptedData:any={};
+  viewEncrypted:boolean=true;
+  viewPlain:boolean=false
   id: any;
   constructor(
     private service: PanService,
@@ -23,7 +26,8 @@ export class ViewPanComponent {
       this.viewIndividual = true;
     }
     this.getData();
-    this.getById(this.id);
+    this.getById(this.id);// remove  it after 
+    this.getEncrypted(this.id);
   }
   panData: any[] = [];
 
@@ -94,5 +98,21 @@ export class ViewPanComponent {
         });
       }
     });
+  }
+  getEncrypted(id: any) {
+    this.service.getEncryptedById(id).subscribe({
+      next: (res) => {
+        if (res) {
+          this.EncryptedData = res;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  changeStatus(){
+    this.viewEncrypted = !this.viewEncrypted;
+    this.viewPlain = !this.viewPlain;
   }
 }

@@ -20,6 +20,10 @@ export class AadharService {
   getByid(id:any):Observable<any>{
     return this.http.get<any>(`${this.baseUrl}/${id}`)
   }
+  
+  getEncryptedById(id:any):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/entity/${id}`)
+   }
 
   //update aadhar 
   updateAadhar(id:any ,data:any):Observable<any>{

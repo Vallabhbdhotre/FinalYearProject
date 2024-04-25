@@ -65,7 +65,7 @@ label {
   margin: 0.6rem;
 }
 .btn {
-  width: 30%;
+  /* width:%; */
   border: 1px solid rgb(28, 22, 91);
   color: white;
   background-color: black;
@@ -308,10 +308,15 @@ form label {
 .Dcard{
   /* border: 1px solid white; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  color: white;
 }
 .Vcard{
+  overflow-x: scroll;
   padding: 15px;
+  width: 50%;
   /* border: 1px solid white; */
   border-radius:15px ;
   backdrop-filter: blur(4px);

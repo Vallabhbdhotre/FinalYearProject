@@ -21,6 +21,12 @@ export class PanService {
    getByid(id:any):Observable<any>{
      return this.http.get<any>(`${this.baseUrl}/${id}`)
    }
+   
+   getEncryptedById(id:any):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/entiry/${id}`)
+   }
+
+
  
    //update pan 
    updatePan(id:any ,data:any):Observable<any>{
