@@ -11,7 +11,6 @@ export class LoginService {
     return this.http.post(`${this.baseUrl}`, data);
   }
 
-
   getToken(){
     return localStorage.getItem('token');
   }

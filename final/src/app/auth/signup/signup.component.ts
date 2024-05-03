@@ -77,11 +77,19 @@ export class SignupComponent {
           this.router.navigate(['auth/login']);
         },
         error: (error) => {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'Something went wrong !',
-          });
-          console.log('error', error);
+          if(error.status==500){
+            this.Toast.fire({
+              icon:'warning',
+              title:'User Already present in the system !'
+            })
+          }
+          else{
+            this.Toast.fire({
+              icon: 'error',
+              title: 'Something went wrong !',
+            });
+            console.log('error', error);
+          }
         },
       });
     } else {
