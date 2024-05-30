@@ -1,4 +1,5 @@
-Your Secure Vault for Safeguarding Sensitive Personal Information
+Your Secure Vault for Safeguarding Sensitive Personal Information.
+
 CryptaShield is a meticulously crafted web application designed to ensure the utmost protection for your sensitive personal information,
 including Aadhar card details, PAN details, and bank information. Our commitment to security and user privacy is at the core of our service,
 providing peace of mind in an increasingly digital world.
